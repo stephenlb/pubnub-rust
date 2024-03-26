@@ -257,7 +257,8 @@
 //!
 //! ## License
 //!
-//! This project is licensed under the [MIT license](https://github.com/pubnub/rust/blob/master/LICENSE).
+//! This project is licensed under the [PubNub Software Development Kit license](https://github.com/pubnub/rust/blob/master/LICENSE).
+//! You can read more about it [here](https://www.pubnub.com/docs/sdks#license-faq).
 
 #[cfg(feature = "access")]
 #[doc(inline)]

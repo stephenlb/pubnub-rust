@@ -19,12 +19,14 @@ env:
 jobs:
   # pubnub-yml:
   #   name: "Validate .pubnub.yml"
-  #   runs-on: ubuntu-latest
+  #   runs-on:
+  #     group: Default Larger Runners
+  #     labels: ubuntu-latest-m
   #   steps:
   #     - name: Checkout project
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Checkout validator action
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #       with:
   #         repository: pubnub/client-engineering-deployment-tools
   #         ref: v1
@@ -40,9 +42,10 @@ jobs:
 
   linters:
     name: Launch all cargo linters to check condition of the code
-    runs-on: ubuntu-latest
+    runs-on:
+      group: Default
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Run cargo check tool to check if the code are valid
         run: |
@@ -68,7 +71,8 @@ jobs:
 
   cargo-deny:
     name: Check Cargo crate dependencies
-    runs-on: ubuntu-latest
+    runs-on:
+      group: Default
     strategy:
       matrix:
         checks:
@@ -77,16 +81,17 @@ jobs:
     # Prevent sudden announcement of a new advisory from failing ci:
     continue-on-error: ${{ matrix.checks == 'advisories' }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: EmbarkStudios/cargo-deny-action@v1
         with:
           command: check ${{ matrix.checks }}
 
   wasm-target:
     name: Check if Web Assembly target compiles as expected
-    runs-on: ubuntu-latest
+    runs-on:
+      group: Default
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install WASM target
         uses: actions-rs/toolchain@v1
@@ -102,9 +107,10 @@ jobs:
 
   no_std-target:
     name: Check if `no_std` target compiles as expected
-    runs-on: ubuntu-latest
+    runs-on:
+      group: Default
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install `no_std` target
         uses: actions-rs/toolchain@v1
@@ -126,8 +132,9 @@ jobs:
 
   all-validations:
     name: Validations
-    runs-on: ubuntu-latest
     needs: [linters, cargo-deny, wasm-target, no_std-target]
+    runs-on:
+      group: Default
     steps:
       - name: Validations summary
         run: echo -e "\033[38;2;95;215;0m\033[1mAll validations passed"

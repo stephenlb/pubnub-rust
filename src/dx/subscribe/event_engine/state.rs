@@ -329,7 +329,7 @@ impl SubscribeState {
                 // Merge stored cursor with service-provided.
                 let mut next_cursor = next_cursor.clone();
                 if let Some(cursor) = cursor {
-                    next_cursor.timetoken = cursor.timetoken.clone();
+                    next_cursor.timetoken.clone_from(&cursor.timetoken);
                 }
 
                 Some(self.transition_to(

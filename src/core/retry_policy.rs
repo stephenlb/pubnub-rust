@@ -304,9 +304,7 @@ impl RequestRetryConfiguration {
     /// * `Some(delay_in_microseconds)` - The delay in microseconds.
     /// * `None` - If `delay_in_seconds` is `None`.
     fn delay_in_microseconds(delay_in_seconds: Option<u64>) -> Option<u64> {
-        let Some(delay_in_seconds) = delay_in_seconds else {
-            return None;
-        };
+        let delay_in_seconds = delay_in_seconds?;
 
         const MICROS_IN_SECOND: u64 = 1_000_000;
         let delay = delay_in_seconds * MICROS_IN_SECOND;

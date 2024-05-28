@@ -537,7 +537,7 @@ where
                         .gt(current_cursor)
                         .then(|| *cursor_slot = Some(catchup_cursor));
                 } else {
-                    *cursor_slot = cursor.clone();
+                    cursor_slot.clone_from(&cursor);
                 }
             }
         }

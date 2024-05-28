@@ -346,7 +346,7 @@ where
         if !event_handlers.is_empty() {
             if let Some((_, handler)) = event_handlers.iter().next() {
                 if let Some(handler) = handler.upgrade().clone() {
-                    client = handler.client().upgrade().clone();
+                    client.clone_from(&handler.client().upgrade());
                 }
             }
         }

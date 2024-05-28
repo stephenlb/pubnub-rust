@@ -840,7 +840,7 @@ mod it_should {
             response: None,
             request_handler: Some(Box::new(|req| {
                 assert!(req.query_parameters.contains_key("state"));
-                assert!(req.query_parameters.get("state").is_some());
+                assert!(req.query_parameters.contains_key("state"));
 
                 let state = req.query_parameters.get("state").unwrap();
                 assert!(state.contains("channel_a"));

@@ -19,7 +19,8 @@ env:
 jobs:
   # pubnub-yml:
   #   name: "Validate .pubnub.yml"
-  #   runs-on: ubuntu-latest
+  #   runs-on:
+  #     group: organization/Default
   #   steps:
   #     - name: Checkout project
   #       uses: actions/checkout@v3
@@ -40,7 +41,8 @@ jobs:
 
   linters:
     name: Launch all cargo linters to check condition of the code
-    runs-on: ubuntu-latest
+    runs-on:
+      group: organization/Default
     steps:
       - uses: actions/checkout@v3
 
@@ -68,7 +70,8 @@ jobs:
 
   cargo-deny:
     name: Check Cargo crate dependencies
-    runs-on: ubuntu-latest
+    runs-on:
+      group: organization/Default
     strategy:
       matrix:
         checks:
@@ -84,7 +87,8 @@ jobs:
 
   wasm-target:
     name: Check if Web Assembly target compiles as expected
-    runs-on: ubuntu-latest
+    runs-on:
+      group: organization/Default
     steps:
       - uses: actions/checkout@v3
 
@@ -102,7 +106,8 @@ jobs:
 
   no_std-target:
     name: Check if `no_std` target compiles as expected
-    runs-on: ubuntu-latest
+    runs-on:
+      group: organization/Default
     steps:
       - uses: actions/checkout@v3
 
@@ -126,8 +131,9 @@ jobs:
 
   all-validations:
     name: Validations
-    runs-on: ubuntu-latest
-    needs: [linters, cargo-deny, wasm-target, no_std-target]
+    runs-on:
+      group: organization/Default
+    needs: [ linters, cargo-deny, wasm-target, no_std-target ]
     steps:
       - name: Validations summary
         run: echo -e "\033[38;2;95;215;0m\033[1mAll validations passed"
